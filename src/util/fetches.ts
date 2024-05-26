@@ -8,7 +8,7 @@ export type PostType = {
   isPublic: boolean;
 };
 
-type Comment = {
+export type Comment = {
   _id: string;
   username: string;
   title: string;
