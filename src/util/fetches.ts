@@ -1,14 +1,21 @@
-export type Post = {
+export type PostType = {
   _id: string;
   title: string;
   content: string;
   __v: number;
-  comments: object[];
+  comments: Comment[];
   date: string;
   isPublic: boolean;
 };
 
-export async function getPosts(): Promise<Post[]> {
+type Comment = {
+  _id: string;
+  username: string;
+  title: string;
+  content: string;
+};
+
+export async function getPosts(): Promise<PostType[]> {
   const response = await fetch("http://localhost:3000/api/posts", {
     method: "GET",
   });

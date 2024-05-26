@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "post",
+        path: ":postId",
         element: <Post />,
       },
     ],
