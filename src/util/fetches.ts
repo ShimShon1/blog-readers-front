@@ -7,6 +7,18 @@ export async function getPosts(): Promise<PostType[]> {
   return (await response.json()).posts;
 }
 
+export async function getSinglePost(
+  postId: string
+): Promise<PostType> {
+  const response = await fetch(
+    `http://localhost:3000/api/posts/${postId}`,
+    {
+      method: "GET",
+    }
+  );
+  return (await response.json()).post;
+}
+
 export async function postComment(
   postId: string,
   newComment: Comment

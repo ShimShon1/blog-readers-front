@@ -1,12 +1,12 @@
-import { useOutletContext, useParams } from "react-router-dom";
-import { useReducer, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { PostType, errorObject, isAPIError } from "../util/types";
-import { postComment } from "../util/fetches";
+import { getSinglePost, postComment } from "../util/fetches";
 
 export default function Post() {
-  const [posts] = useOutletContext<[PostType[]]>();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [, forceUpdate] = useReducer(x => x + 1, 0);
+  const postId = useParams().postId;
+
+  const [post, setPost] = useState<PostType>();
   const [newComment, setNewComment] = useState({
     username: "",
     title: "",
@@ -16,17 +16,20 @@ export default function Post() {
     errorObject[]
   >([]);
 
-  console.log("errors", newCommentErrors);
-  const postId = useParams().postId;
-  const post = posts.find(post => post._id == postId);
+  useEffect(() => {
+    if (!postId) return;
+    console.log(postId);
+    getSinglePost(postId).then(res => setPost(res));
+    console.log("Post used");
+  }, [postId]);
+
   if (!post) {
     return <div>404 Not found</div>;
   }
-
   const comments = !post.comments
     ? "No comments"
     : post.comments.map(comment => (
-        <article className="border">
+        <article className="border" key={comment._id}>
           <h3>{comment.title}</h3>
           <p>{comment.content}</p>
           <p>By: {comment.username}</p>
@@ -43,8 +46,7 @@ export default function Post() {
         setNewCommentErrors(updatedComments.errors);
         return;
       }
-      post.comments = updatedComments;
-      forceUpdate();
+      setPost({ ...post, comments: updatedComments });
       setNewCommentErrors([]);
     }
   }
