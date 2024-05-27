@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
 import "./styles/index.css";
 import { useEffect, useState } from "react";
-import { PostType, getPosts } from "./util/fetches";
+import { getPosts } from "./util/fetches";
+import { PostType } from "./util/types";
 function App() {
   const [posts, setPosts] = useState<PostType[]>([]);
 

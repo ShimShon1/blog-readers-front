@@ -1,19 +1,26 @@
 import { useOutletContext, useParams } from "react-router-dom";
-import { Comment, PostType } from "../util/fetches";
 import { useReducer, useState } from "react";
+import { PostType, errorObject, isAPIError } from "../util/types";
+import { postComment } from "../util/fetches";
 
 export default function Post() {
   const [posts] = useOutletContext<[PostType[]]>();
-  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-  const [comment, setComment] = useState({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
+  const [newComment, setNewComment] = useState({
     username: "",
     title: "",
     content: "",
   });
+  const [newCommentErrors, setNewCommentErrors] = useState<
+    errorObject[]
+  >([]);
+
+  console.log("errors", newCommentErrors);
   const postId = useParams().postId;
   const post = posts.find(post => post._id == postId);
   if (!post) {
-    return <h1>404 not found</h1>;
+    return <div>404 Not found</div>;
   }
 
   const comments = !post.comments
@@ -26,37 +33,28 @@ export default function Post() {
         </article>
       ));
 
-  async function postComment(
-    postId: string,
-    newComment: Comment
-  ): Promise<{ Comments: Comment[] }> {
-    const response = await fetch(
-      `http://localhost:3000/api/posts/${postId}/comments`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify(newComment),
-      }
-    );
-    return (await response.json()).comments;
-  }
   async function onCommentSubmit(
     e: React.FormEvent<HTMLFormElement>
   ) {
-    e.preventDefault();
-    console.log("ga");
-    const updatedComments = await postComment(postId, comment);
-    post.comments = updatedComments;
-    forceUpdate();
+    if (post && postId) {
+      e.preventDefault();
+      const updatedComments = await postComment(postId, newComment);
+      if (isAPIError(updatedComments)) {
+        setNewCommentErrors(updatedComments.errors);
+        return;
+      }
+      post.comments = updatedComments;
+      forceUpdate();
+      setNewCommentErrors([]);
+    }
   }
 
-  function handleInputChange(e) {
-    setComment({ ...comment, [e.target.name]: e.target.value });
+  function handleInputChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    //React.ChangeEvent<HTMLInputElement>
+    setNewComment({ ...newComment, [e.target.name]: e.target.value });
   }
-  console.log(comment);
   return (
     <>
       <section>
@@ -71,43 +69,44 @@ export default function Post() {
         <h2>comments:</h2>
         {comments}
         <h2>Post a comment:</h2>
-        <form
-          action=""
-          method="post"
-          onSubmit={e => onCommentSubmit(e)}
-        >
+        <form action="" method="post" onSubmit={onCommentSubmit}>
           <label>
             Username
             <input
+              required
               type="text"
               name="username"
               className="border border-black"
-              value={comment.username}
+              value={newComment.username}
               onChange={handleInputChange}
             />
           </label>
           <label>
             Title:
             <input
+              required
               type="text"
               name="title"
               className="border border-black"
-              value={comment.title}
+              value={newComment.title}
               onChange={handleInputChange}
             />
           </label>
           <label>
             Content:
-            <input
-              type="text"
+            <textarea
+              required
               name="content"
               className="border border-black"
-              value={comment.content}
-              onChange={handleInputChange}
+              value={newComment.content}
+              onChange={e => handleInputChange(e)}
             />
           </label>
           <button className="border border-black">Submit</button>
         </form>
+        {newCommentErrors.length
+          ? newCommentErrors.map(err => <div>{err.msg}</div>)
+          : ""}
       </section>
     </>
   );
