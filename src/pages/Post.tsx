@@ -1,12 +1,13 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useLoaderData, useParams } from "react-router-dom";
+import { useState } from "react";
 import { PostType, errorObject, isAPIError } from "../util/types";
-import { getSinglePost, postComment } from "../util/fetches";
+import { postComment } from "../util/fetches";
 
 export default function Post() {
-  const postId = useParams().postId;
-
-  const [post, setPost] = useState<PostType>();
+  const postId = useParams().postId!;
+  const { post: loadedPost } = useLoaderData() as { post: PostType };
+  console.log("loader", loadedPost);
+  const [post, setPost] = useState<PostType>(loadedPost);
   const [newComment, setNewComment] = useState({
     username: "",
     title: "",
@@ -16,19 +17,9 @@ export default function Post() {
     errorObject[]
   >([]);
 
-  useEffect(() => {
-    if (!postId) return;
-    console.log(postId);
-    getSinglePost(postId).then(res => setPost(res));
-    console.log("Post used");
-  }, [postId]);
-
-  if (!post) {
-    return <div>404 Not found</div>;
-  }
-  const comments = !post.comments
+  const comments = !post?.comments
     ? "No comments"
-    : post.comments.map(comment => (
+    : post?.comments.map(comment => (
         <article className="border" key={comment._id}>
           <h3>{comment.title}</h3>
           <p>{comment.content}</p>
@@ -61,9 +52,9 @@ export default function Post() {
     <>
       <section>
         <article>
-          <h1>{post.title}</h1>
-          <p>{post.content}</p>
-          <p>created at: {post.date}</p>
+          <h1>{post?.title}</h1>
+          <p>{post?.content}</p>
+          <p>created at: {post?.date}</p>
           <hr />
         </article>
       </section>

@@ -29,5 +29,5 @@ export type APIError = {
 export function isAPIError(
   error: APIError | unknown
 ): error is APIError {
-  return (error as APIError).errors !== undefined;
+  return (error as APIError)?.errors !== undefined;
 }

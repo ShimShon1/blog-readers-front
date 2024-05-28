@@ -7,6 +7,9 @@ import {
 } from "react-router-dom";
 import Post from "./pages/Post.tsx";
 import Home from "./pages/Home.tsx";
+import NotFound from "./pages/NotFound.tsx";
+import ErrorElement from "./components/ErrorElement.tsx";
+import { loadPosts, loadSinglePost } from "./util/fetches.ts";
 
 const router = createBrowserRouter([
   {
@@ -15,14 +18,22 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
+        loader: loadPosts,
         element: <Home />,
       },
 
       {
         path: ":postId",
+        loader: loadSinglePost,
+
         element: <Post />,
       },
+      {
+        path: "404",
+        element: <NotFound />,
+      },
     ],
+    errorElement: <ErrorElement></ErrorElement>,
   },
 ]);
 

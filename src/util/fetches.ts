@@ -1,22 +1,27 @@
-import { APIError, Comment, PostType } from "./types";
+import { APIError, Comment } from "./types";
 
-export async function getPosts(): Promise<PostType[]> {
+export async function loadPosts() {
   const response = await fetch("http://localhost:3000/api/posts", {
     method: "GET",
   });
-  return (await response.json()).posts;
+  if (response.status != 200) {
+    throw response;
+  }
+  return response;
 }
 
-export async function getSinglePost(
-  postId: string
-): Promise<PostType> {
+export async function loadSinglePost({ params }) {
   const response = await fetch(
-    `http://localhost:3000/api/posts/${postId}`,
+    `http://localhost:3000/api/posts/${params.postId}`,
     {
       method: "GET",
     }
   );
-  return (await response.json()).post;
+  if (response.status != 200) {
+    throw response;
+  }
+
+  return response;
 }
 
 export async function postComment(
