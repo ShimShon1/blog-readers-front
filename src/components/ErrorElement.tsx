@@ -3,44 +3,31 @@ import {
   isRouteErrorResponse,
   useRouteError,
 } from "react-router-dom";
+import Nav from "./Nav";
 
 export default function ErrorElement() {
   const error = useRouteError();
-
+  let errorMsg = "Something Went Wrong";
   if (isRouteErrorResponse(error)) {
-    if (error.status === 404) {
-      return (
-        <div>
-          This page doesn't exist!{" "}
-          <Link className="text-cyan-700" to={"/"}>
-            Go back Home
-          </Link>
-        </div>
-      );
-    }
-
-    if (error.status === 401) {
-      return (
-        <div>
-          You aren't authorized to see this{" "}
-          <Link className="text-cyan-700" to={"/"}>
-            Go back Home
-          </Link>
-        </div>
-      );
-    }
-
-    if (error.status >= 500) {
-      return (
-        <div>
-          Unexpected Error
-          <Link className="text-cyan-700" to={"/"}>
-            Go back Home
-          </Link>
-        </div>
-      );
-    }
+    const status = error.status;
+    errorMsg =
+      status === 404
+        ? "This page doesn't exist!"
+        : status === 401
+          ? "You are not authorized!"
+          : status === 500
+            ? "Unexpected error!"
+            : "Something went wrong!";
   }
-
-  return <div>Something went wrong</div>;
+  return (
+    <>
+      <Nav />
+      <main>
+        {errorMsg}{" "}
+        <Link className="text-cyan-700" to={"/"}>
+          Go back Home
+        </Link>
+      </main>
+    </>
+  );
 }

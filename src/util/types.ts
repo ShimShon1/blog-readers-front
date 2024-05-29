@@ -6,6 +6,7 @@ export type PostType = {
   comments: Comment[];
   date: string;
   isPublic: boolean;
+  views: number;
 };
 
 export type Comment = {
