@@ -4,11 +4,11 @@ import Nav from "./components/Nav";
 
 function App() {
   return (
-    <div className="relative h-full min-h-[200vh] bg-gradient-to-tr from-violet-950 to-violet-700 text-sky-50">
+    <div className="relative grid h-full min-h-[100vh] grid-rows-[100%,2fr] bg-gradient-to-tr from-violet-950 to-violet-700 text-sky-50">
       <header className=" sticky top-0">
         <Nav />
       </header>
-      <main className=" text-sky-50">
+      <main className=" h-full p-1 text-sky-50 lg:p-5 lg:pt-0">
         <Outlet />
       </main>
     </div>
