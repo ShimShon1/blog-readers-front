@@ -9,6 +9,7 @@ import Post from "./pages/Post.tsx";
 import Home from "./pages/Home.tsx";
 import ErrorElement from "./components/ErrorElement.tsx";
 import { loadPosts, loadSinglePost } from "./util/fetches.ts";
+import About from "./pages/About.tsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         loader: loadSinglePost,
 
         element: <Post />,
+      },
+      {
+        path: "about",
+        element: <About />,
       },
     ],
     errorElement: <ErrorElement />,
