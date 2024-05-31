@@ -20,14 +20,16 @@ export default function ErrorElement() {
             : "Something went wrong!";
   }
   return (
-    <>
+    <div className=" min-h-[100vh]  bg-gradient-to-tr from-violet-950 to-violet-700 text-sky-50">
       <Nav />
-      <main>
-        {errorMsg}{" "}
-        <Link className="text-cyan-700" to={"/"}>
-          Go back Home
-        </Link>
+      <main className="  m-auto mt-1 h-full gap-1 bg-violet-950 p-3 pb-2 text-lg shadow-lg lg:mt-2 lg:w-11/12 lg:gap-3 lg:p-4 lg:pb-2 lg:pt-3 lg:text-xl lg:shadow-2xl">
+        <p>
+          {errorMsg}{" "}
+          <Link className="ml-2 text-cyan-600" to={"/"}>
+            Go back Home
+          </Link>
+        </p>
       </main>
-    </>
+    </div>
   );
 }

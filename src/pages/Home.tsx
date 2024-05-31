@@ -15,16 +15,15 @@ export default function Home() {
   const postsElements = posts.map(post => {
     const date = new Date(post.date).toLocaleString();
     return (
-      <div>
+      <div key={post._id}>
         <Link to={"/" + post._id}>
-          <article
-            className="relative  m-auto grid h-full gap-1 border-t-[1px] bg-violet-950 p-3 pb-2 shadow-lg hover:cursor-pointer hover:bg-opacity-65 lg:w-11/12 lg:p-4 lg:pb-2 lg:pt-3 lg:shadow-2xl"
-            key={post._id}
-          >
-            <h2 className="text-base lg:text-lg">{post.title}</h2>
-            <p className="  max-h-6 max-w-[40ch] overflow-hidden text-sm text-slate-300 lg:max-w-[80ch] lg:text-base">
-              {post.content + "..."}
-            </p>
+          <article className="relative  m-auto grid h-full gap-1 border-t-[1px] bg-violet-950 p-3 pb-2 shadow-lg hover:cursor-pointer hover:bg-opacity-65 lg:w-11/12 lg:gap-3 lg:p-4 lg:pb-2 lg:pt-3 lg:shadow-2xl">
+            <div>
+              <h2 className="text-base lg:text-lg">{post.title}</h2>
+              <p className="  max-h-6 max-w-[40ch] overflow-hidden text-sm text-slate-300 lg:max-w-[80ch] lg:text-base">
+                {post.content + "..."}
+              </p>
+            </div>
 
             <div className="flex items-center justify-between gap-2 self-end text-sm   lg:text-base">
               <span className="text-xs text-slate-400 lg:text-sm">
@@ -47,7 +46,7 @@ export default function Home() {
                     alt=""
                     className="w-4 lg:w-6"
                   />
-                  {post.comments.length}
+                  {post.comments_count}
                 </div>
               </div>
             </div>

@@ -7,6 +7,7 @@ export type PostType = {
   date: string;
   isPublic: boolean;
   views: number;
+  comments_count?: number;
 };
 
 export type Comment = {
