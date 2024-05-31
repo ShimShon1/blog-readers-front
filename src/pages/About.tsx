@@ -44,8 +44,12 @@ export default function About() {
             Here's a Komodo Dragon:
           </h2>
           <div className="relative mt-2 w-3/4 lg:mt-4">
-            <div className="position absolute right-0 top-0 h-full w-full  bg-violet-950 bg-opacity-40 hover:bg-opacity-0"></div>
-            <img className=" rounded-xl " src={comodoUrl} alt="" />
+            <div className="position absolute right-0 top-0 h-full  w-full bg-violet-950 bg-opacity-40 hover:bg-opacity-0"></div>
+            <img
+              className=" min-h-60  rounded-xl"
+              src={comodoUrl}
+              alt=""
+            />
           </div>
         </section>
       </div>

@@ -1,20 +1,39 @@
+import { useState } from "react";
+
 type FormType = {
   onCommentSubmit: (
-    e: React.FormEvent<HTMLFormElement>
+    e: React.FormEvent<HTMLFormElement>,
+    newComment: {
+      username: string;
+      title: string;
+      content: string;
+    }
   ) => Promise<void>;
-  handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
 };
 
-export default function Form({
-  handleInputChange,
-  onCommentSubmit,
-}: FormType) {
+export default function Form({ onCommentSubmit }: FormType) {
+  const [newComment, setNewComment] = useState({
+    username: "",
+    title: "",
+    content: "",
+  });
+  function handleInputChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    //React.ChangeEvent<HTMLInputElement>
+    setNewComment({ ...newComment, [e.target.name]: e.target.value });
+  }
   return (
     <form
-      className="space-y-4  p-4 text-lg text-violet-800 "
-      onSubmit={onCommentSubmit}
+      className="mt-2  space-y-4 text-lg text-violet-800 lg:mt-4 "
+      onSubmit={e => {
+        onCommentSubmit(e, newComment);
+        setNewComment({
+          username: "",
+          title: "",
+          content: "",
+        });
+      }}
     >
       <div className="space-y-4  ">
         <div className="">
@@ -25,6 +44,7 @@ export default function Form({
             placeholder="Your name"
             name="username"
             onChange={handleInputChange}
+            value={newComment.username}
             required
           />
         </div>
@@ -35,6 +55,7 @@ export default function Form({
             placeholder="Title"
             name="title"
             onChange={handleInputChange}
+            value={newComment.title}
             className="h-10 w-full rounded-sm border border-violet-700 indent-2 focus:outline-none focus:outline-violet-400 "
             required
           />
@@ -46,7 +67,8 @@ export default function Form({
           placeholder="Content"
           name="content"
           onChange={handleInputChange}
-          rows={6}
+          value={newComment.content}
+          rows={5}
           className="w-full rounded-md border border-violet-700 indent-2 focus:outline-none focus:outline-violet-400"
           aria-label="content"
           required

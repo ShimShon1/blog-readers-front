@@ -5,10 +5,10 @@ import Nav from "./components/Nav";
 function App() {
   return (
     <div className="relative grid h-full min-h-[100vh] grid-rows-[100%,2fr] bg-gradient-to-tr from-violet-950 to-violet-700 text-sky-50">
-      <header className=" sticky top-0">
+      <header className=" sticky top-0 z-10">
         <Nav />
       </header>
-      <main className=" h-full  p-1 text-sky-50 lg:pt-0">
+      <main className="   h-full p-1 text-sky-50 lg:pt-0">
         <Outlet />
       </main>
     </div>
