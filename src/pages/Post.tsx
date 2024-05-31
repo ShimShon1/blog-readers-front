@@ -2,6 +2,7 @@ import { useLoaderData, useParams } from "react-router-dom";
 import { useState } from "react";
 import { PostType, errorObject, isAPIError } from "../util/types";
 import { postComment } from "../util/fetches";
+import Form from "../components/Form";
 
 export default function Post() {
   const postId = useParams().postId!;
@@ -49,7 +50,7 @@ export default function Post() {
     setNewComment({ ...newComment, [e.target.name]: e.target.value });
   }
   return (
-    <>
+    <div className="relative m-auto  mt-2 grid  gap-1 border-t-[1px] bg-violet-950 p-3 pb-2 shadow-lg  lg:mt-4 lg:w-11/12 lg:gap-3 lg:p-7  lg:pt-4 lg:shadow-2xl">
       <section>
         <article>
           <h1>{post?.title}</h1>
@@ -62,45 +63,16 @@ export default function Post() {
         <h2>comments:</h2>
         {comments}
         <h2>Post a comment:</h2>
-        <form action="" method="post" onSubmit={onCommentSubmit}>
-          <label>
-            Username
-            <input
-              required
-              type="text"
-              name="username"
-              className="border border-black"
-              value={newComment.username}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Title:
-            <input
-              required
-              type="text"
-              name="title"
-              className="border border-black"
-              value={newComment.title}
-              onChange={handleInputChange}
-            />
-          </label>
-          <label>
-            Content:
-            <textarea
-              required
-              name="content"
-              className="border border-black"
-              value={newComment.content}
-              onChange={e => handleInputChange(e)}
-            />
-          </label>
-          <button className="border border-black">Submit</button>
-        </form>
+
+        <Form
+          onCommentSubmit={onCommentSubmit}
+          handleInputChange={handleInputChange}
+        />
+
         {newCommentErrors.length
           ? newCommentErrors.map(err => <div>{err.msg}</div>)
           : ""}
       </section>
-    </>
+    </div>
   );
 }

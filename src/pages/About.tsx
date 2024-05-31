@@ -2,8 +2,8 @@ import comodoUrl from "../assets/comodo.jpg";
 
 export default function About() {
   return (
-    <div className="relative m-auto  mt-2 grid h-full gap-1 border-t-[1px] bg-violet-950 p-3 pb-2 shadow-lg  lg:mt-4 lg:w-11/12 lg:gap-3 lg:p-4 lg:pb-2 lg:pt-3 lg:shadow-2xl">
-      <main className="  lg:text-lg lg:leading-8 xl:grid xl:grid-cols-2 xl:gap-10">
+    <div className="relative m-auto  mt-2 grid  gap-1 border-t-[1px] bg-violet-950 p-3 pb-2 shadow-lg  lg:mt-4 lg:w-11/12 lg:gap-3 lg:p-7  lg:pt-4 lg:shadow-2xl">
+      <div className="  lg:text-lg lg:leading-8 xl:grid xl:grid-cols-2 xl:gap-10">
         <section className="max-w-[40ch] leading-7 lg:max-w-[70ch]">
           <h1 className="lg text-2xl lg:text-3xl">
             About This Blog:
@@ -43,13 +43,12 @@ export default function About() {
           <h2 className="mt-6 text-xl lg:text-2xl xl:mt-0">
             Here's a Komodo Dragon:
           </h2>
-          <img
-            className="mt-2 w-3/4 rounded-xl lg:mt-4"
-            src={comodoUrl}
-            alt=""
-          />
+          <div className="relative mt-2 w-3/4 lg:mt-4">
+            <div className="position absolute right-0 top-0 h-full w-full  bg-violet-950 bg-opacity-40 hover:bg-opacity-0"></div>
+            <img className=" rounded-xl " src={comodoUrl} alt="" />
+          </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }
