@@ -3,18 +3,19 @@ export type PostType = {
   title: string;
   content: string;
   __v: number;
-  comments: Comment[];
+  comments: CommentType[];
   date: string;
   isPublic: boolean;
   views: number;
   comments_count?: number;
 };
 
-export type Comment = {
+export type CommentType = {
   _id?: string;
   username: string;
   title: string;
   content: string;
+  date?: string;
 };
 
 export type errorObject = {

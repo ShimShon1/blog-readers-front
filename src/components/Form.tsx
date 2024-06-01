@@ -1,13 +1,9 @@
 import { useState } from "react";
-
+import { CommentType } from "../util/types";
 type FormType = {
   onCommentSubmit: (
     e: React.FormEvent<HTMLFormElement>,
-    newComment: {
-      username: string;
-      title: string;
-      content: string;
-    }
+    newComment: CommentType
   ) => Promise<void>;
 };
 

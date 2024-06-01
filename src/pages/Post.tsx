@@ -1,8 +1,14 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { useState } from "react";
-import { PostType, errorObject, isAPIError } from "../util/types";
+import {
+  CommentType,
+  PostType,
+  errorObject,
+  isAPIError,
+} from "../util/types";
 import { postComment } from "../util/fetches";
 import Form from "../components/Form";
+import Comment from "../components/Comment";
 
 export default function Post() {
   const postId = useParams().postId!;
@@ -12,32 +18,10 @@ export default function Post() {
   const [newCommentErrors, setNewCommentErrors] = useState<
     errorObject[]
   >([]);
-
-  const comments = !post?.comments
-    ? "No comments"
-    : post?.comments.map(comment => (
-        <article
-          className="space-y-3 bg-violet-900 bg-opacity-30 p-4 pb-2 pt-1 shadow-md "
-          key={comment._id}
-        >
-          <div>
-            <h3 className="mb-1 mt-2 text-lg lg:mt-4 lg:text-xl ">
-              {comment.title}
-            </h3>
-            <p className="">{comment.content}</p>
-          </div>
-          <hr className="opacity-10" />
-          <p className="text-xs">By: {comment.username}</p>
-        </article>
-      ));
-
+  console.log(typeof post.views);
   async function onCommentSubmit(
     e: React.FormEvent<HTMLFormElement>,
-    newComment: {
-      username: string;
-      title: string;
-      content: string;
-    }
+    newComment: CommentType
   ) {
     if (post && postId) {
       e.preventDefault();
@@ -50,12 +34,14 @@ export default function Post() {
       setNewCommentErrors([]);
     }
   }
-
+  const comments = !post?.comments
+    ? "No comments"
+    : post?.comments.map(comment => <Comment comment={comment} />);
   return (
     <div className="relative m-auto  mt-2 grid  gap-1 border-t-[1px] bg-violet-950 p-3 pb-2 shadow-lg  lg:mt-4 lg:w-11/12 lg:gap-3 lg:p-7  lg:pt-4 lg:shadow-2xl">
       <section>
         <article>
-          <h1 className="lg text-2xl tracking-wide lg:text-3xl">
+          <h1 className=" text-2xl tracking-wide lg:text-3xl">
             {post?.title}
           </h1>
           <p className="text-sm text-slate-400 lg:text-base">
