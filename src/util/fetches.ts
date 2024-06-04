@@ -1,9 +1,12 @@
 import { APIError, Comment } from "./types";
 
 export async function loadPosts() {
-  const response = await fetch("http://localhost:3000/api/posts", {
-    method: "GET",
-  });
+  const response = await fetch(
+    "https://blog-api-production-4443.up.railway.app/api/posts",
+    {
+      method: "GET",
+    }
+  );
   if (response.status != 200) {
     throw response;
   }
@@ -12,7 +15,7 @@ export async function loadPosts() {
 
 export async function loadSinglePost({ params }) {
   const response = await fetch(
-    `http://localhost:3000/api/posts/${params.postId}`,
+    `https://blog-api-production-4443.up.railway.app/api/posts/${params.postId}`,
     {
       method: "GET",
     }
@@ -29,7 +32,7 @@ export async function postComment(
   newComment: Comment
 ): Promise<Comment[] | APIError> {
   const response = await fetch(
-    `http://localhost:3000/api/posts/${postId}/comments`,
+    `https://blog-api-production-4443.up.railway.app/api/posts/${postId}/comments`,
     {
       method: "POST",
       headers: {
