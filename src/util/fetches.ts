@@ -1,4 +1,4 @@
-import { APIError, Comment } from "./types";
+import { APIError, CommentType } from "./types";
 
 export async function loadPosts() {
   const response = await fetch(
@@ -30,7 +30,7 @@ export async function loadSinglePost({ params }) {
 export async function postComment(
   postId: string,
   newComment: Comment
-): Promise<Comment[] | APIError> {
+): Promise<CommentType[] | APIError> {
   const response = await fetch(
     `https://blog-api-production-4443.up.railway.app/api/posts/${postId}/comments`,
     {
