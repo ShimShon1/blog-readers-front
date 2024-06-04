@@ -18,7 +18,6 @@ export default function Post() {
   const [newCommentErrors, setNewCommentErrors] = useState<
     errorObject[]
   >([]);
-  console.log(typeof post.views);
   async function onCommentSubmit(
     e: React.FormEvent<HTMLFormElement>,
     newComment: CommentType
