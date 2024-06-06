@@ -8,7 +8,7 @@ function App() {
       <header className=" sticky top-0 z-10">
         <Nav />
       </header>
-      <main className="   h-full p-1 text-sky-50 lg:pt-0">
+      <main className="p-1 pt-2 text-sky-50 lg:pt-4">
         <Outlet />
       </main>
     </div>

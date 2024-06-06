@@ -16,9 +16,7 @@ export default function PostPreview({ post }: { post: PostType }) {
         </div>
 
         <div className="flex items-center justify-between gap-2 self-end text-sm   lg:text-base">
-          <span className="text-xs text-slate-400 lg:text-sm">
-            {date}
-          </span>
+          <p className="text-xs text-slate-400 lg:text-sm">{date}</p>
 
           <div className="flex items-center gap-2 lg:absolute lg:right-5 lg:top-[15%] lg:flex-col lg:justify-center ">
             <div className="flex items-center gap-1">
@@ -26,12 +24,16 @@ export default function PostPreview({ post }: { post: PostType }) {
                 src={viewsIcon}
                 className=" h-auto w-4 lg:w-6 "
                 width={17}
-                alt=""
+                alt="views icon"
               />
               {post.views}
             </div>
             <div className="flex gap-1 ">
-              <img src={commentsIcon} alt="" className="w-4 lg:w-6" />
+              <img
+                src={commentsIcon}
+                alt="comments icon"
+                className="w-4 lg:w-6"
+              />
               {post.comments_count}
             </div>
           </div>

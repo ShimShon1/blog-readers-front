@@ -2,9 +2,9 @@ import comodoUrl from "../assets/comodo.jpg";
 
 export default function About() {
   return (
-    <div className="relative m-auto  mt-2 grid  gap-1 border-t-[1px] bg-violet-950 p-3 pb-2 shadow-lg  lg:mt-4 lg:w-11/12 lg:gap-3 lg:p-7  lg:pt-4 lg:shadow-2xl">
+    <div className="relative m-auto   grid  gap-1 border-t-[1px] bg-violet-950 p-3 pb-2 shadow-lg   lg:w-11/12 lg:gap-3 lg:p-7  lg:pt-4 lg:shadow-2xl">
       <div className="  lg:text-lg lg:leading-8 xl:grid xl:grid-cols-2 xl:gap-10">
-        <section className="max-w-[40ch] leading-7 lg:max-w-[70ch]">
+        <div className="max-w-[40ch] leading-7 lg:max-w-[70ch]">
           <h1 className="lg text-2xl lg:text-3xl">
             About This Blog:
           </h1>
@@ -38,8 +38,8 @@ export default function About() {
             ea amet temporibus placeat perspiciatis maiores omnis
             corporis natus suscipit aut numquam.
           </p>
-        </section>
-        <section>
+        </div>
+        <div>
           <h2 className="mt-6 text-xl lg:text-2xl xl:mt-0">
             Here's a Komodo Dragon:
           </h2>
@@ -51,7 +51,7 @@ export default function About() {
               alt=""
             />
           </div>
-        </section>
+        </div>
       </div>
     </div>
   );
