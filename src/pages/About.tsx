@@ -16,7 +16,7 @@ export default function About() {
             this is just an excuse to add something to the navigation
             bar, There's absoluetly nothing about it.
           </p>
-          <h2 className="mt-2 text-xl lg:mt-4 lg:text-2xl">
+          <h2 className="mt-4 text-xl lg:mt-8 lg:text-2xl">
             Take Some Lorem Ipsum:
           </h2>
           <p>
@@ -43,10 +43,10 @@ export default function About() {
           <h2 className="mt-6 text-xl lg:text-2xl xl:mt-0">
             Here's a Komodo Dragon:
           </h2>
-          <div className="relative mt-2 w-3/4 lg:mt-4">
+          <div className="relative mt-2 w-full md:w-3/4 lg:mt-4">
             <div className="position absolute right-0 top-0 h-full  w-full bg-violet-950 bg-opacity-40 hover:bg-opacity-0"></div>
             <img
-              className=" min-h-60  rounded-xl"
+              className=" min-h-60 w-full rounded-xl"
               src={comodoUrl}
               alt=""
             />

@@ -1,21 +1,22 @@
 import { APIError, CommentType } from "./types";
 
+const endpoint = "http://localhost:3000";
+// const endpoint = "https://blog-api-production-4443.up.railway.app";
+
 export async function loadPosts() {
-  const response = await fetch(
-    "https://blog-api-production-4443.up.railway.app/api/posts",
-    {
-      method: "GET",
-    }
-  );
+  const response = await fetch(`${endpoint}/api/posts`, {
+    method: "GET",
+  });
   if (response.status != 200) {
     throw response;
   }
   return response;
 }
 
-export async function loadSinglePost({ params }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function loadSinglePost({ params }: any) {
   const response = await fetch(
-    `https://blog-api-production-4443.up.railway.app/api/posts/${params.postId}`,
+    `${endpoint}/api/posts/${params.postId}`,
     {
       method: "GET",
     }
@@ -29,10 +30,10 @@ export async function loadSinglePost({ params }) {
 
 export async function postComment(
   postId: string,
-  newComment: Comment
+  newComment: CommentType
 ): Promise<CommentType[] | APIError> {
   const response = await fetch(
-    `https://blog-api-production-4443.up.railway.app/api/posts/${postId}/comments`,
+    `${endpoint}/api/posts/${postId}/comments`,
     {
       method: "POST",
       headers: {
