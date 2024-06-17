@@ -7,6 +7,7 @@ export default function Home() {
   const { posts } = useLoaderData() as {
     posts: PostType[];
   };
+
   // const [posts] = useState<PostType[]>(loadedPosts);
 
   if (!posts) return <div>404</div>;
