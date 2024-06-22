@@ -10,6 +10,8 @@ import Home from "./pages/Home.tsx";
 import ErrorElement from "./components/ErrorElement.tsx";
 import { loadPosts, loadSinglePost } from "./util/fetches.ts";
 import About from "./pages/About.tsx";
+import Layout from "./components/Layout.tsx";
+import Loading from "./components/Loading.tsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,13 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider
+      fallbackElement={
+        <Layout>
+          <Loading />
+        </Layout>
+      }
+      router={router}
+    />
   </React.StrictMode>
 );

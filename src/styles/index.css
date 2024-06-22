@@ -23,3 +23,22 @@
 .active {
   opacity: 0.67;
 }
+
+.loader {
+  margin: auto;
+  margin-top: 1rem;
+  animation-duration: 1s;
+  animation-name: loading;
+  animation-iteration-count: infinite;
+  animation-delay: none;
+  animation-timing-function: linear;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
