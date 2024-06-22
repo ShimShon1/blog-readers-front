@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { CommentType } from "../util/types";
 type FormType = {
-  onCommentSubmit: (
+  onSubmit: (
     e: React.FormEvent<HTMLFormElement>,
     newComment: CommentType
   ) => Promise<boolean>;
 };
 
-export default function Form({ onCommentSubmit }: FormType) {
+export default function Form({ onSubmit }: FormType) {
   const [newComment, setNewComment] = useState({
     username: "",
     title: "",
@@ -22,7 +22,7 @@ export default function Form({ onCommentSubmit }: FormType) {
     <form
       className="mt-2  space-y-4 text-lg text-violet-800 lg:mt-4 "
       onSubmit={async e => {
-        const submitted = await onCommentSubmit(e, newComment);
+        const submitted = await onSubmit(e, newComment);
         if (submitted) {
           setNewComment({
             username: "",

@@ -1,7 +1,7 @@
 import { APIError, CommentType } from "./types";
 
 // const endpoint = "http://localhost:3000";
-const endpoint = "https://blog-api-production-4443.up.railway.app";
+const endpoint = "https://blog-api-ts-production.up.railway.app";
 
 export async function loadPosts() {
   const response = await fetch(`${endpoint}/api/posts`, {

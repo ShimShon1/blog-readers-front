@@ -18,7 +18,7 @@ export default function Post() {
   const [newCommentErrors, setNewCommentErrors] = useState<
     errorObject[]
   >([]);
-  async function onCommentSubmit(
+  async function handleCommentSubmit(
     e: React.FormEvent<HTMLFormElement>,
     newComment: CommentType
   ) {
@@ -60,7 +60,7 @@ export default function Post() {
           Post a comment:
         </h2>
 
-        <Form onCommentSubmit={onCommentSubmit} />
+        <Form onSubmit={handleCommentSubmit} />
 
         <p className="pt-2 text-red-200 lg:text-xl">
           {newCommentErrors.length
